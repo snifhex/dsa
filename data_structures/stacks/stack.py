@@ -16,6 +16,10 @@ class StackBase(ABC):
         poped_value = self.bucket.pop()
         self.set_length()
         return poped_value
+    
+    def top(self):
+        if self.length:
+            return self.bucket[0]
 
     def lastitem(self):
         return self.bucket[-1]
@@ -56,9 +60,17 @@ class LifoQueueStack(StackBase):
         self.set_length()
     
     def pop(self):
-        poped_value = self.bucket.get()
-        self.set_length()
-        return poped_value
+        if self.length:
+            poped_value = self.bucket.get()
+            self.set_length()
+            return poped_value
+        else:
+            raise IndexError("pop from empty stack")
+    
+    def top(self):
+        if self.length:
+            return self.bucket.queue[0]
+        
 
     def lastitem(self):
         return self.bucket.queue[-1]
